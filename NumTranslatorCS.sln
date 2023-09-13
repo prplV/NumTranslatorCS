@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.4.33205.214
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NumTranslatorCS", "NumTranslatorCS\NumTranslatorCS.csproj", "{9B0A5EF4-2FB2-400C-BE26-900B4AD3320E}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{9B0A5EF4-2FB2-400C-BE26-900B4AD3320E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9B0A5EF4-2FB2-400C-BE26-900B4AD3320E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9B0A5EF4-2FB2-400C-BE26-900B4AD3320E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9B0A5EF4-2FB2-400C-BE26-900B4AD3320E}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {84FAF1C3-FF76-44DA-891D-5B5FA57D2EB9}
+	EndGlobalSection
+EndGlobal
