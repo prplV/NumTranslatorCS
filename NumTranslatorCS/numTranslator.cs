@@ -95,6 +95,11 @@ namespace NumTranslatorCS
           {
             return;
           }
+          else if (statusList[0] == 's')
+        {
+          errorHandler.errorSyntaxOrder(numbersSplitted[0], "единицы, десятки, числа типа 11-19 или сотня", 0);
+          return;
+        }
           else{
             finalNumber.Add(res);
           }
@@ -120,19 +125,19 @@ namespace NumTranslatorCS
           {
             if (statusList[1] != 'h')
             {
-              errorHandler.errorSyntaxOrder(numbersSplitted[numbersSplitted.Length-1], "hundert", 1);
+              errorHandler.errorSyntaxOrder(numbersSplitted[numbersSplitted.Length-1], "hundert для создания чисел типа (100, 200 ...)", 1);
               return;
             }
           } else if (statusList[0] == 'h')
           {
             if ((statusList[1] == 'd') && ((numbersSplitted[numbersSplitted.Length - 1] != "ein") && (numbersSplitted[numbersSplitted.Length - 1] != "zwei")))
             {
-              errorHandler.errorSyntaxOrder(numbersSplitted[numbersSplitted.Length - 1], "ein, zwei или десятки", 1);
+              errorHandler.errorSyntaxOrder(numbersSplitted[numbersSplitted.Length - 1], "ein, zwei (для чисел типа 101, 102) или десятки (для чисел 110, 120...)", 1);
               return;
             }
             else if (statusList[1] == 'e')
             {
-              errorHandler.errorSyntaxOrder("число типа '11-19'", "ein, zwei или десятки", 1);
+              errorHandler.errorSyntaxOrder("число типа '11-19' после hundert без единиц", "конструкция единицы + hundert + числа типа 11-19", 1);
               return;
             }
           }
@@ -157,15 +162,24 @@ namespace NumTranslatorCS
         // verification
         if (statusList[0] != 'd')
         {
-          errorHandler.errorSyntaxOrder(numbersSplitted[0], "единицы", 0);
+          errorHandler.errorSyntaxOrder(numbersSplitted[0], "единицы в начале", 0);
           return;
         }
         else
         {
           if ((statusList[1] != 's')&&(statusList[1] != 'h'))
           {
-            errorHandler.errorSyntaxOrder(numbersSplitted[1], "hundert или und", 1);
-            return;
+            if ((statusList[1] != 's')&&(statusList[2] == 'n'))
+            {
+              errorHandler.errorSyntaxOrder(numbersSplitted[0], "und между единицами и десятками", 0);
+              return;
+            } else if ((statusList[1] != 'h'))
+            {
+              errorHandler.errorSyntaxOrder(numbersSplitted[0], "слово hundert после единиц", 0);
+              return;
+            }
+            //errorHandler.errorSyntaxOrder(numbersSplitted[1], "hundert или und", 1);
+            //return;
           }
           else
           {
@@ -173,14 +187,14 @@ namespace NumTranslatorCS
             {
               if (statusList[2] != 'n')
               {
-                errorHandler.errorSyntaxOrder(numbersSplitted[2], "десятки", 2);
+                errorHandler.errorSyntaxOrder(numbersSplitted[2], "десятки после und для написания двузначного числа типа (21, 45 ...)", 2);
                 return;
               }
             } else if (statusList[1] == 'h')
             {
               if ((statusList[2] != 'd') && (statusList[2] != 'e') && (statusList[2] != 'n'))
               {
-                errorHandler.errorSyntaxOrder(numbersSplitted[2], "единицы, десятки или числа типа '11-19'", 2);
+                errorHandler.errorSyntaxOrder(numbersSplitted[2], "единицы, десятки или числа типа '11-19' после hundert", 2);
                 return;
               }
             }
@@ -188,6 +202,7 @@ namespace NumTranslatorCS
         }
       }
       // 210 и 220 (zwei hundert und zwanzig)
+      
       else if (numbersSplitted.Length == 4)
       {
         foreach (string temp in numbersSplitted)
@@ -207,28 +222,33 @@ namespace NumTranslatorCS
         //verification
         if (statusList[0] != 'd')
         {
-          errorHandler.errorSyntaxOrder(numbersSplitted[0], "единицы", 0);
+          errorHandler.errorSyntaxOrder(numbersSplitted[0], "единицы для написания типа (123, 234 ...)", 0);
           return;
         }
         else
         {
           if (statusList[1] != 'h')
           {
-            errorHandler.errorSyntaxOrder(numbersSplitted[1], "hundert", 1);
+            errorHandler.errorSyntaxOrder(numbersSplitted[1], "hundert после единиц", 1);
             return;
           }
           else
           {
-            if (statusList[2] != 's')
+            if (statusList[2] != 'd')
             {
-              errorHandler.errorSyntaxOrder(numbersSplitted[2], "und", 2);
+              errorHandler.errorSyntaxOrder(numbersSplitted[2], "единицы после hundert", 2);
               return;
             }
             else
             {
-              if (statusList[3] != 'n')
+              if (statusList[3] != 's')
               {
-                errorHandler.errorSyntaxOrder(numbersSplitted[3], "десятки", 3);
+                errorHandler.errorSyntaxOrder(numbersSplitted[3], "und после единицы для связи десятков и единиц", 3);
+                return;
+              }
+              else
+              {
+                errorHandler.errorSyntaxOrder(numbersSplitted[3], "десятки после слова und", 3);
                 return;
               }
             }
@@ -257,35 +277,35 @@ namespace NumTranslatorCS
         //verification 
         if (statusList[0] != 'd')
         {
-          errorHandler.errorSyntaxOrder(numbersSplitted[0], "единицы", 0);
+          errorHandler.errorSyntaxOrder(numbersSplitted[0], "единицы для написания типа (123, 234 ...)", 0);
           return;
         }
         else
         {
           if (statusList[1] != 'h')
           {
-            errorHandler.errorSyntaxOrder(numbersSplitted[1], "hundret", 1);
+            errorHandler.errorSyntaxOrder(numbersSplitted[1], "hundert после единиц", 1);
             return;
           }
           else
           {
             if (statusList[2] != 'd')
             {
-              errorHandler.errorSyntaxOrder(numbersSplitted[2], "единицы", 2);
+              errorHandler.errorSyntaxOrder(numbersSplitted[2], "единицы после hundert", 2);
               return;
             }
             else
             {
               if (statusList[3] != 's')
               {
-                errorHandler.errorSyntaxOrder(numbersSplitted[3], "und", 3);
+                errorHandler.errorSyntaxOrder(numbersSplitted[3], "und после единиц для связи единиц и десятков", 3);
                 return;
               }
               else
               {
                 if (statusList[4] != 'n')
                 {
-                  errorHandler.errorSyntaxOrder(numbersSplitted[4], "десятки", 4);
+                  errorHandler.errorSyntaxOrder(numbersSplitted[4], "десятки после und", 4);
                   return;
                 }
               }
@@ -297,6 +317,7 @@ namespace NumTranslatorCS
       else
       {
         errorHandler.errorGlobalTransLen();
+        return;
       }
 
       if (finalNumber.Count != statusList.Count)

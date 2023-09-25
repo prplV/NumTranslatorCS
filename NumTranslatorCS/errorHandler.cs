@@ -1,4 +1,5 @@
-﻿using System.Windows.Forms;
+﻿using System.Collections.Generic;
+using System.Windows.Forms;
 
 namespace NumTranslatorCS
 {
@@ -11,6 +12,25 @@ namespace NumTranslatorCS
       mainForm = form;
     }
     // errors
+    public static void globalErrorMessageHandler(string[] numbersSplitted, List<char> statusList)
+    {
+      if (numbersSplitted.Length == 1)
+      {
+        
+      } else if (numbersSplitted.Length == 2)
+      {
+
+      } else if (numbersSplitted.Length == 3)
+      {
+
+      } else if (numbersSplitted.Length == 4)
+      {
+
+      } else if (numbersSplitted.Length == 5)
+      {
+        
+      }
+    }
     public static void errorEmptyTransField()
     {
       MessageBox.Show(mainForm, "Поле для записи транскрипции числа не заполнено", "Поле пустое", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -21,7 +41,7 @@ namespace NumTranslatorCS
     }
     public static void errorGlobalListLens()
     {
-      MessageBox.Show(mainForm, "Глобальная ошибка разности длин списка статуса и списка слов", "Глобальная ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+      MessageBox.Show(mainForm, "Глобальная ошибка разности контольных сумм списка статуса и списка слов", "Глобальная ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
     }
 
     public static void errorSyntax(string witness)
@@ -31,7 +51,7 @@ namespace NumTranslatorCS
 
     public static void errorSyntaxOrder(string received, string expected, int position )
     {
-      MessageBox.Show(mainForm, $"Неправильный порядок числительных в исходном числе.\nОжидалось - {expected}, получено - {received}.\nНомер слова - {++position}", "Ошибка порядка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+      MessageBox.Show(mainForm, $"Неправильный формат ввода числа.\nОжидалось - {expected}, получено - {received}.\nНомер слова - {++position}", "Ошибка порядка", MessageBoxButtons.OK, MessageBoxIcon.Error);
     }
 
     // infos 
