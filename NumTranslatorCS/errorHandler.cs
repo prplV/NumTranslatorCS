@@ -48,10 +48,26 @@ namespace NumTranslatorCS
     {
       MessageBox.Show(mainForm, $"Ошибка в слове {witness}", "Синтаксическая ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
     }
+    public static void errorSyntaxOrder(string received, string expected)
+    {
+      MessageBox.Show(mainForm, $"{expected} не может стоять после {received}!", "Неправильный формат ввода числа", MessageBoxButtons.OK, MessageBoxIcon.Error);
+    }
 
     public static void errorSyntaxOrder(string received, string expected, int position )
     {
-      MessageBox.Show(mainForm, $"Неправильный формат ввода числа.\nОжидалось - {expected}, получено - {received}.\nНомер слова - {++position}", "Ошибка порядка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+      MessageBox.Show(mainForm, $"{expected} не может стоять перед {received}!", "Неправильный формат ввода числа", MessageBoxButtons.OK, MessageBoxIcon.Error);
+    }
+    public static void errorSyntaxOrder(string received)
+    {
+      MessageBox.Show(mainForm, $"{received} не может быть транслировано! Это не число", "Неправильный формат ввода числа", MessageBoxButtons.OK, MessageBoxIcon.Error);
+    }
+    public static void errorSyntaxOrderMessage(string received)
+    {
+      MessageBox.Show(mainForm, $"{received}", "Неправильный формат ввода числа", MessageBoxButtons.OK, MessageBoxIcon.Error);
+    }
+    public static void customError(string message)
+    {
+      MessageBox.Show(mainForm, $"{message}", "Неправильный формат ввода числа", MessageBoxButtons.OK, MessageBoxIcon.Error);
     }
 
     // infos 

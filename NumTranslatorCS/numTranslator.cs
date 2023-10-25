@@ -97,7 +97,7 @@ namespace NumTranslatorCS
           }
           else if (statusList[0] == 's')
         {
-          errorHandler.errorSyntaxOrder(numbersSplitted[0], "единицы, десятки, числа типа 11-19 или сотня", 0);
+          errorHandler.errorSyntaxOrder(numbersSplitted[0]);
           return;
         }
           else{
@@ -121,26 +121,29 @@ namespace NumTranslatorCS
           }
         }
           // verification
-          if (statusList[0] == 'd')
+          /*if (statusList[0] == 'd')
           {
             if (statusList[1] != 'h')
             {
-              errorHandler.errorSyntaxOrder(numbersSplitted[numbersSplitted.Length-1], "hundert для создания чисел типа (100, 200 ...)", 1);
+              errorHandler.errorSyntaxOrder($"единиц ({numbersSplitted[0]})", numbersSplitted[1]);
               return;
             }
           } else if (statusList[0] == 'h')
           {
-            if ((statusList[1] == 'd') && ((numbersSplitted[numbersSplitted.Length - 1] != "ein") && (numbersSplitted[numbersSplitted.Length - 1] != "zwei")))
+            if (statusList[1] == 'd')
             {
-              errorHandler.errorSyntaxOrder(numbersSplitted[numbersSplitted.Length - 1], "ein, zwei (для чисел типа 101, 102) или десятки (для чисел 110, 120...)", 1);
+              if ((numbersSplitted[1] != "ein") && (numbersSplitted[1] != "zwei"))
+              {
+                errorHandler.errorSyntaxOrder($"{numbersSplitted[0]}", $"Единица {numbersSplitted[1]}");
+                return;
+              }
+            }
+            else
+            {
+              errorHandler.errorSyntaxOrder($"{numbersSplitted[0]}", numbersSplitted[1]);
               return;
             }
-            else if (statusList[1] == 'e')
-            {
-              errorHandler.errorSyntaxOrder("число типа '11-19' после hundert без единиц", "конструкция единицы + hundert + числа типа 11-19", 1);
-              return;
-            }
-          }
+          }*/
       }
       // 2.1 2.11 2.0.1
       else if (numbersSplitted.Length == 3)
@@ -160,9 +163,9 @@ namespace NumTranslatorCS
         }
 
         // verification
-        if (statusList[0] != 'd')
+        /*if (statusList[0] != 'd')
         {
-          errorHandler.errorSyntaxOrder(numbersSplitted[0], "единицы в начале", 0);
+          errorHandler.errorSyntaxOrderMessage($"Трехсоставное слово не может начинаться с {numbersSplitted[0]}");
           return;
         }
         else
@@ -171,11 +174,11 @@ namespace NumTranslatorCS
           {
             if ((statusList[1] != 's')&&(statusList[2] == 'n'))
             {
-              errorHandler.errorSyntaxOrder(numbersSplitted[0], "und между единицами и десятками", 0);
+              errorHandler.errorSyntaxOrder($"десятками ({numbersSplitted[2]})", $"{numbersSplitted[1]}", 1);
               return;
             } else if ((statusList[1] != 'h'))
             {
-              errorHandler.errorSyntaxOrder(numbersSplitted[0], "слово hundert после единиц", 0);
+              errorHandler.errorSyntaxOrder($"единиц ({numbersSplitted[0]})", numbersSplitted[1]);
               return;
             }
             //errorHandler.errorSyntaxOrder(numbersSplitted[1], "hundert или und", 1);
@@ -187,24 +190,25 @@ namespace NumTranslatorCS
             {
               if (statusList[2] != 'n')
               {
-                errorHandler.errorSyntaxOrder(numbersSplitted[2], "десятки после und для написания двузначного числа типа (21, 45 ...)", 2);
+                errorHandler.errorSyntaxOrder($"специального слова ({numbersSplitted[1]})", numbersSplitted[2]);
                 return;
               }
             } else if (statusList[1] == 'h')
             {
               if ((statusList[2] != 'd') && (statusList[2] != 'e') && (statusList[2] != 'n'))
               {
-                errorHandler.errorSyntaxOrder(numbersSplitted[2], "единицы, десятки или числа типа '11-19' после hundert", 2);
+                errorHandler.errorSyntaxOrder($"{numbersSplitted[1]}", numbersSplitted[2]);
                 return;
               }
             }
           }
-        }
+        }*/
       }
       // 210 и 220 (zwei hundert und zwanzig)
       
       else if (numbersSplitted.Length == 4)
       {
+        errorHandler.customError("В немецком языке нет числительных, в составе которых четыре слова");
         foreach (string temp in numbersSplitted)
         {
           int res = globalFind(temp);
@@ -220,40 +224,40 @@ namespace NumTranslatorCS
         }
 
         //verification
-        if (statusList[0] != 'd')
+        /*if (statusList[0] != 'd')
         {
-          errorHandler.errorSyntaxOrder(numbersSplitted[0], "единицы для написания типа (123, 234 ...)", 0);
+          errorHandler.errorSyntaxOrderMessage($"Число не может начинаться со слова {numbersSplitted[0]}");
           return;
         }
         else
         {
           if (statusList[1] != 'h')
           {
-            errorHandler.errorSyntaxOrder(numbersSplitted[1], "hundert после единиц", 1);
-            return;
+            if (statusList[1] == 's')
+            {
+              errorHandler.errorSyntaxOrder($"{numbersSplitted[2]}", $"{numbersSplitted[1]}", 1);
+              return;
+            }
+            else
+            {
+              errorHandler.errorSyntaxOrder($"{numbersSplitted[0]}", $"{numbersSplitted[1]}");
+              return;
+            }
           }
           else
           {
             if (statusList[2] != 'd')
             {
-              errorHandler.errorSyntaxOrder(numbersSplitted[2], "единицы после hundert", 2);
+              errorHandler.errorSyntaxOrder($"{numbersSplitted[1]}", $"{numbersSplitted[2]}");
               return;
             }
             else
             {
-              if (statusList[3] != 's')
-              {
-                errorHandler.errorSyntaxOrder(numbersSplitted[3], "und после единицы для связи десятков и единиц", 3);
+                errorHandler.errorSyntaxOrder($"{numbersSplitted[2]}", $"{numbersSplitted[3]}");
                 return;
-              }
-              else
-              {
-                errorHandler.errorSyntaxOrder(numbersSplitted[3], "десятки после слова und", 3);
-                return;
-              }
             }
           }
-        }
+        }*/
       }
 
       //234
@@ -277,35 +281,35 @@ namespace NumTranslatorCS
         //verification 
         if (statusList[0] != 'd')
         {
-          errorHandler.errorSyntaxOrder(numbersSplitted[0], "единицы для написания типа (123, 234 ...)", 0);
+          errorHandler.errorSyntaxOrderMessage($"Пятисоставное число не может начинаться словом {numbersSplitted[0]}");
           return;
         }
         else
         {
           if (statusList[1] != 'h')
           {
-            errorHandler.errorSyntaxOrder(numbersSplitted[1], "hundert после единиц", 1);
+            errorHandler.errorSyntaxOrder($"{numbersSplitted[0]}", $"{numbersSplitted[1]}");
             return;
           }
           else
           {
             if (statusList[2] != 'd')
             {
-              errorHandler.errorSyntaxOrder(numbersSplitted[2], "единицы после hundert", 2);
+              errorHandler.errorSyntaxOrder($"{numbersSplitted[1]}", $"{numbersSplitted[2]}");
               return;
             }
             else
             {
               if (statusList[3] != 's')
               {
-                errorHandler.errorSyntaxOrder(numbersSplitted[3], "und после единиц для связи единиц и десятков", 3);
+                errorHandler.errorSyntaxOrder($"{numbersSplitted[2]}", $"{numbersSplitted[3]}");
                 return;
               }
               else
               {
                 if (statusList[4] != 'n')
                 {
-                  errorHandler.errorSyntaxOrder(numbersSplitted[4], "десятки после und", 4);
+                  errorHandler.errorSyntaxOrder($"{numbersSplitted[3]}", $"{numbersSplitted[4]}");
                   return;
                 }
               }
@@ -328,7 +332,7 @@ namespace NumTranslatorCS
 
       // out of a class
       int output = 0;
-      if ((finalNumber.Count > 2) && (numbersSplitted[1] == hundred))
+      if ((finalNumber.Count >= 2) && (numbersSplitted[1] == hundred))
       {
         for (int i = 0; i < finalNumber.Count; i++)
         {
