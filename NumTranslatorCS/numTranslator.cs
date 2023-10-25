@@ -87,7 +87,6 @@ namespace NumTranslatorCS
     }
     private void checkLength()
     {
-      //1 10 11 100
       if (numbersSplitted.Length == 1)
       {
           int res = globalFind(numbersSplitted[0]);
@@ -104,7 +103,6 @@ namespace NumTranslatorCS
             finalNumber.Add(res);
           }
       }
-      // 2.00 3.00 ...
       else if (numbersSplitted.Length == 2)
       {
         foreach (string temp in numbersSplitted)
@@ -120,32 +118,7 @@ namespace NumTranslatorCS
             finalNumber.Add(res);
           }
         }
-          // verification
-          /*if (statusList[0] == 'd')
-          {
-            if (statusList[1] != 'h')
-            {
-              errorHandler.errorSyntaxOrder($"единиц ({numbersSplitted[0]})", numbersSplitted[1]);
-              return;
-            }
-          } else if (statusList[0] == 'h')
-          {
-            if (statusList[1] == 'd')
-            {
-              if ((numbersSplitted[1] != "ein") && (numbersSplitted[1] != "zwei"))
-              {
-                errorHandler.errorSyntaxOrder($"{numbersSplitted[0]}", $"Единица {numbersSplitted[1]}");
-                return;
-              }
-            }
-            else
-            {
-              errorHandler.errorSyntaxOrder($"{numbersSplitted[0]}", numbersSplitted[1]);
-              return;
-            }
-          }*/
       }
-      // 2.1 2.11 2.0.1
       else if (numbersSplitted.Length == 3)
       {
         foreach (string temp in numbersSplitted)
@@ -161,54 +134,10 @@ namespace NumTranslatorCS
             finalNumber.Add(res);
           }
         }
-
-        // verification
-        /*if (statusList[0] != 'd')
-        {
-          errorHandler.errorSyntaxOrderMessage($"Трехсоставное слово не может начинаться с {numbersSplitted[0]}");
-          return;
-        }
-        else
-        {
-          if ((statusList[1] != 's')&&(statusList[1] != 'h'))
-          {
-            if ((statusList[1] != 's')&&(statusList[2] == 'n'))
-            {
-              errorHandler.errorSyntaxOrder($"десятками ({numbersSplitted[2]})", $"{numbersSplitted[1]}", 1);
-              return;
-            } else if ((statusList[1] != 'h'))
-            {
-              errorHandler.errorSyntaxOrder($"единиц ({numbersSplitted[0]})", numbersSplitted[1]);
-              return;
-            }
-            //errorHandler.errorSyntaxOrder(numbersSplitted[1], "hundert или und", 1);
-            //return;
-          }
-          else
-          {
-            if (statusList[1] == 's')
-            {
-              if (statusList[2] != 'n')
-              {
-                errorHandler.errorSyntaxOrder($"специального слова ({numbersSplitted[1]})", numbersSplitted[2]);
-                return;
-              }
-            } else if (statusList[1] == 'h')
-            {
-              if ((statusList[2] != 'd') && (statusList[2] != 'e') && (statusList[2] != 'n'))
-              {
-                errorHandler.errorSyntaxOrder($"{numbersSplitted[1]}", numbersSplitted[2]);
-                return;
-              }
-            }
-          }
-        }*/
       }
-      // 210 и 220 (zwei hundert und zwanzig)
       
       else if (numbersSplitted.Length == 4)
       {
-        errorHandler.customError("В немецком языке нет числительных, в составе которых четыре слова");
         foreach (string temp in numbersSplitted)
         {
           int res = globalFind(temp);
@@ -222,45 +151,8 @@ namespace NumTranslatorCS
             finalNumber.Add(res);
           }
         }
-
-        //verification
-        /*if (statusList[0] != 'd')
-        {
-          errorHandler.errorSyntaxOrderMessage($"Число не может начинаться со слова {numbersSplitted[0]}");
-          return;
-        }
-        else
-        {
-          if (statusList[1] != 'h')
-          {
-            if (statusList[1] == 's')
-            {
-              errorHandler.errorSyntaxOrder($"{numbersSplitted[2]}", $"{numbersSplitted[1]}", 1);
-              return;
-            }
-            else
-            {
-              errorHandler.errorSyntaxOrder($"{numbersSplitted[0]}", $"{numbersSplitted[1]}");
-              return;
-            }
-          }
-          else
-          {
-            if (statusList[2] != 'd')
-            {
-              errorHandler.errorSyntaxOrder($"{numbersSplitted[1]}", $"{numbersSplitted[2]}");
-              return;
-            }
-            else
-            {
-                errorHandler.errorSyntaxOrder($"{numbersSplitted[2]}", $"{numbersSplitted[3]}");
-                return;
-            }
-          }
-        }*/
       }
 
-      //234
       else if (numbersSplitted.Length == 5)
       {
         foreach (string temp in numbersSplitted)
@@ -276,48 +168,7 @@ namespace NumTranslatorCS
             finalNumber.Add(res);
           }
         }
-
-
-        //verification 
-        /*if (statusList[0] != 'd')
-        {
-          errorHandler.errorSyntaxOrderMessage($"Пятисоставное число не может начинаться словом {numbersSplitted[0]}");
-          return;
-        }
-        else
-        {
-          if (statusList[1] != 'h')
-          {
-            errorHandler.errorSyntaxOrder($"{numbersSplitted[0]}", $"{numbersSplitted[1]}");
-            return;
-          }
-          else
-          {
-            if (statusList[2] != 'd')
-            {
-              errorHandler.errorSyntaxOrder($"{numbersSplitted[1]}", $"{numbersSplitted[2]}");
-              return;
-            }
-            else
-            {
-              if (statusList[3] != 's')
-              {
-                errorHandler.errorSyntaxOrder($"{numbersSplitted[2]}", $"{numbersSplitted[3]}");
-                return;
-              }
-              else
-              {
-                if (statusList[4] != 'n')
-                {
-                  errorHandler.errorSyntaxOrder($"{numbersSplitted[3]}", $"{numbersSplitted[4]}");
-                  return;
-                }
-              }
-            }
-          }
-        }*/
       }
-      // error len 
       else
       {
         errorHandler.errorGlobalTransLen();
@@ -330,7 +181,33 @@ namespace NumTranslatorCS
         return;
       }
 
-      // out of a class
+      //VERIFICATION 
+
+      int tempIndex = 0;
+      foreach (char wit in statusList)
+      {
+        ++tempIndex;
+        if (statusList.Count == tempIndex)
+        {
+          if (!Verification(wit))
+          {
+            return;
+          }
+        }
+        else
+        {
+          if (!Verification(wit, statusList[tempIndex], numbersSplitted[tempIndex-1], numbersSplitted[tempIndex]))
+          {
+            return;
+          }
+        }
+      }
+
+      //VERIFICATION
+
+
+
+        // out of a class
       int output = 0;
       if ((finalNumber.Count >= 2) && (numbersSplitted[1] == hundred))
       {
@@ -429,6 +306,50 @@ namespace NumTranslatorCS
         }
       }
       return -1;
+    }
+    private bool Verification(char witness)
+    {
+      if ((witness == 'd') || (witness == 'n') || (witness == 'h') || (witness == 'e'))
+      {
+        return true;
+      }
+      errorHandler.customError("Число не может оканчиваться словом und");
+      return false;
+    }
+    private bool Verification(char witness, char nextWitness, string first, string second)
+    {
+      if (witness == 'd')
+      {
+        if ((nextWitness != 'h') && (nextWitness != 's'))
+        {
+          errorHandler.MatchingTypesError_After(witness, nextWitness, first, second);
+          return false;
+        }
+        return true;
+      }
+      else if (witness == 'h')
+      {
+        if ((nextWitness != 'd') && (nextWitness != 'e') && (nextWitness != 's'))
+        {
+          errorHandler.MatchingTypesError_After(witness, nextWitness, first, second);
+          return false;
+        }
+        return true;
+      }
+      else if (witness == 's')
+      {
+        if (nextWitness != 'n')
+        {
+          errorHandler.MatchingTypesError_After(witness, nextWitness, first, second);
+          return false;
+        }
+        return true;
+      }
+      else
+      {
+        errorHandler.MatchingTypesError_After(witness, nextWitness, first, second);
+        return false;
+      }
     }
   }
 }

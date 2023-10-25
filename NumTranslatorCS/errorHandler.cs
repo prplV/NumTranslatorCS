@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Net.NetworkInformation;
 using System.Windows.Forms;
 
 namespace NumTranslatorCS
@@ -68,6 +69,55 @@ namespace NumTranslatorCS
     public static void customError(string message)
     {
       MessageBox.Show(mainForm, $"{message}", "Неправильный формат ввода числа", MessageBoxButtons.OK, MessageBoxIcon.Error);
+    }
+    public static void MatchingTypesError_After(char first, char second, string er1, string er2)
+    {
+      string f = null;
+      string s = null;
+      switch (first)
+      {
+        case 'd':
+          f = "единицы";
+          break;
+        case 'n':
+          f = "десятки";
+          break;
+        case 'e':
+          f = "числа 11-19";
+          break;
+        case 'h':
+          f = "слова для обозначения сотен HUNDERT";
+          break;
+        case 's':
+          f = "служебного слова UND";
+          break;
+        default:
+          MessageBox.Show(mainForm, $"Critical exception was called while parsing the 'first' type-char", "Critical error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+          break;
+      };
+      switch (second)
+      {
+        case 'd':
+          s = "Единица";
+          break;
+        case 'n':
+          s = "Десятка";
+          break;
+        case 'e':
+          s = "Число 11-19";
+          break;
+        case 'h':
+          s = "Слово для обозначения сотен HUNDERT";
+          break;
+        case 's':
+          s = "Служебное слово UND";
+          break;
+        default:
+          MessageBox.Show(mainForm, $"Critical exception was called while parsing the 'second' type-char", "Critical error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+          break;
+      };
+      MessageBox.Show(mainForm, $"{s} не может стоять после {f} -> ({er1} {er2})!", "Неправильный формат ввода числа", MessageBoxButtons.OK, MessageBoxIcon.Error);
+      return;
     }
 
     // infos 
