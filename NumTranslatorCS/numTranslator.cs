@@ -279,7 +279,7 @@ namespace NumTranslatorCS
 
 
         //verification 
-        if (statusList[0] != 'd')
+        /*if (statusList[0] != 'd')
         {
           errorHandler.errorSyntaxOrderMessage($"Пятисоставное число не может начинаться словом {numbersSplitted[0]}");
           return;
@@ -315,7 +315,7 @@ namespace NumTranslatorCS
               }
             }
           }
-        }
+        }*/
       }
       // error len 
       else
