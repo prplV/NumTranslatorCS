@@ -90,93 +90,32 @@ namespace NumTranslatorCS
     }
     private void checkLength()
     {
-      if (numbersSplitted.Length == 1)
+      int tempIndex = 0;
+      foreach (string temp in numbersSplitted)
       {
-          int res = globalFind(numbersSplitted[0]);
-          if (res == -1)
-          {
-            errorHandler.errorSyntax(numbersSplitted[0]);
-            return;
-          }
-          else if (statusList[0] == 's')
+        ++tempIndex;
+        int res = globalFind(temp);
+        if (res == -1)
+        {
+          errorHandler.errorSyntax(temp);
+          return;
+        }
+        else
+        {
+          if (tempIndex == 1 && statusList[0] == 's')
           {
             errorHandler.errorSyntaxOrder(numbersSplitted[0]);
             return;
           }
-          else{
-            finalNumber.Add(res);
-          }
-      }
-      else if (numbersSplitted.Length == 2)
-      {
-        foreach (string temp in numbersSplitted)
-        {
-          int res = globalFind(temp);
-          if (res == -1)
+          else if (tempIndex > 2 && statusList[tempIndex-1] == 'h' && statusList[tempIndex - 3] == 'h')
           {
-            errorHandler.errorSyntax(temp);
+            /////
+            errorHandler.TwoHundertUsage();
             return;
+            /////
           }
-          else
-          {
-            finalNumber.Add(res);
-          }
+          finalNumber.Add(res);
         }
-      }
-      else if (numbersSplitted.Length == 3)
-      {
-        foreach (string temp in numbersSplitted)
-        {
-          int res = globalFind(temp);
-          if (res == -1)
-          {
-            errorHandler.errorSyntax(temp);
-            return;
-          }
-          else
-          {
-            finalNumber.Add(res);
-          }
-        }
-      }
-      
-      else if (numbersSplitted.Length == 4)
-      {
-        foreach (string temp in numbersSplitted)
-        {
-          int res = globalFind(temp);
-          if (res == -1)
-          {
-            errorHandler.errorSyntax(temp);
-            return;
-          }
-          else
-          {
-            finalNumber.Add(res);
-          }
-        }
-      }
-
-      else if (numbersSplitted.Length == 5)
-      {
-        foreach (string temp in numbersSplitted)
-        {
-          int res = globalFind(temp);
-          if (res == -1)
-          {
-            errorHandler.errorSyntax(temp);
-            return;
-          }
-          else
-          {
-            finalNumber.Add(res);
-          }
-        }
-      }
-      else
-      {
-        errorHandler.errorGlobalTransLen();
-        return;
       }
 
       if (finalNumber.Count != statusList.Count)
@@ -187,7 +126,7 @@ namespace NumTranslatorCS
 
       //VERIFICATION 
 
-      int tempIndex = 0;
+      tempIndex = 0;
       foreach (char wit in statusList)
       {
         ++tempIndex;
@@ -211,7 +150,7 @@ namespace NumTranslatorCS
 
 
 
-        // out of a class
+      // out of a class
       int output = 0;
       if ((finalNumber.Count >= 2) && (numbersSplitted[1] == hundred))
       {
@@ -232,6 +171,11 @@ namespace NumTranslatorCS
         {
           output += num;
         }
+      }
+      if (output > 999)
+      {
+        errorHandler.errorGlobalTransLen();
+        return;
       }
       mainForm.getOutput(output);
     }
@@ -333,7 +277,7 @@ namespace NumTranslatorCS
       }
       else if (witness == 'h')
       {
-        if ((nextWitness != 'd') && (nextWitness != 'e')) // && (nextWitness != 's'))
+        if ((nextWitness != 'd') && (nextWitness != 'e') && (nextWitness != 'n'))
         {
           errorHandler.MatchingTypesError_After(witness, nextWitness, first, second);
           return false;
