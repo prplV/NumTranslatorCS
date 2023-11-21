@@ -99,10 +99,10 @@ namespace NumTranslatorCS
             return;
           }
           else if (statusList[0] == 's')
-        {
-          errorHandler.errorSyntaxOrder(numbersSplitted[0]);
-          return;
-        }
+          {
+            errorHandler.errorSyntaxOrder(numbersSplitted[0]);
+            return;
+          }
           else{
             finalNumber.Add(res);
           }

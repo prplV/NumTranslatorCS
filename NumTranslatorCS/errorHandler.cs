@@ -13,25 +13,6 @@ namespace NumTranslatorCS
       mainForm = form;
     }
     // errors
-    public static void globalErrorMessageHandler(string[] numbersSplitted, List<char> statusList)
-    {
-      if (numbersSplitted.Length == 1)
-      {
-        
-      } else if (numbersSplitted.Length == 2)
-      {
-
-      } else if (numbersSplitted.Length == 3)
-      {
-
-      } else if (numbersSplitted.Length == 4)
-      {
-
-      } else if (numbersSplitted.Length == 5)
-      {
-        
-      }
-    }
     public static void errorEmptyTransField()
     {
       MessageBox.Show(mainForm, "Поле для записи транскрипции числа не заполнено", "Поле пустое", MessageBoxButtons.OK, MessageBoxIcon.Error);
