@@ -1,7 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Drawing;
+﻿using System.Collections.Generic;
 using System.Windows.Forms;
 
 namespace NumTranslatorCS
@@ -30,41 +27,47 @@ namespace NumTranslatorCS
     public numTranslator(string userQuery, Form thisForm)
     {
       // set a memmory to 0-9 dict with digits and adding needed info
-      digits = new Dictionary<int, string>();
-      digits.Add(1, "ein");
-      digits.Add(2, "zwei");
-      digits.Add(3, "drei");
-      digits.Add(4, "vier");
-      digits.Add(5, "fünf");
-      digits.Add(6, "sechs");
-      digits.Add(7, "sieben");
-      digits.Add(8, "acht");
-      digits.Add(9, "neun");
-      digits.Add(0, "null");
+      digits = new Dictionary<int, string>
+      {
+        { 1, "ein" },
+        { 2, "zwei" },
+        { 3, "drei" },
+        { 4, "vier" },
+        { 5, "fünf" },
+        { 6, "sechs" },
+        { 7, "sieben" },
+        { 8, "acht" },
+        { 9, "neun" },
+        { 0, "null" }
+      };
 
       // set a memmory to 10, 20, 30 ... dict with digits and adding needed info
-      numbers = new Dictionary<int, string>();
-      numbers.Add(10, "zehn");
-      numbers.Add(20, "zwanzig");
-      numbers.Add(30, "dreißig");
-      numbers.Add(40, "vierzig");
-      numbers.Add(50, "fünfzig");
-      numbers.Add(60, "sechzig");
-      numbers.Add(70, "siebzig");
-      numbers.Add(80, "achtzig");
-      numbers.Add(90, "neunzig");
+      numbers = new Dictionary<int, string>
+      {
+        { 10, "zehn" },
+        { 20, "zwanzig" },
+        { 30, "dreißig" },
+        { 40, "vierzig" },
+        { 50, "fünfzig" },
+        { 60, "sechzig" },
+        { 70, "siebzig" },
+        { 80, "achtzig" },
+        { 90, "neunzig" }
+      };
 
       // set a memmory to 11-19 dict with digits and adding needed info
-      excepts = new Dictionary<int, string>();
-      excepts.Add(11, "elf");
-      excepts.Add(12, "zwölf");
-      excepts.Add(13, "dreizehn");
-      excepts.Add(14, "vierzehn");
-      excepts.Add(15, "fünfzehn");
-      excepts.Add(16, "sechzehn");
-      excepts.Add(17, "siebzehn");
-      excepts.Add(18, "achtzehn");
-      excepts.Add(19, "neunzehn");
+      excepts = new Dictionary<int, string>
+      {
+        { 11, "elf" },
+        { 12, "zwölf" },
+        { 13, "dreizehn" },
+        { 14, "vierzehn" },
+        { 15, "fünfzehn" },
+        { 16, "sechzehn" },
+        { 17, "siebzehn" },
+        { 18, "achtzehn" },
+        { 19, "neunzehn" }
+      };
 
       // set a values to variables for '100' and special word
       specialWords = "und";
