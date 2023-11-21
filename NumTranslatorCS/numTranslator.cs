@@ -92,6 +92,7 @@ namespace NumTranslatorCS
           int res = globalFind(numbersSplitted[0]);
           if (res == -1)
           {
+            errorHandler.errorSyntax(numbersSplitted[0]);
             return;
           }
           else if (statusList[0] == 's')
@@ -254,7 +255,7 @@ namespace NumTranslatorCS
           res = findNumber(witness);
           if (res == -1)
           {
-            errorHandler.errorSyntax(witness);
+            //errorHandler.errorSyntax(witness);
             return -1;
           }
           else
@@ -329,7 +330,7 @@ namespace NumTranslatorCS
       }
       else if (witness == 'h')
       {
-        if ((nextWitness != 'd') && (nextWitness != 'e') && (nextWitness != 's'))
+        if ((nextWitness != 'd') && (nextWitness != 'e')) // && (nextWitness != 's'))
         {
           errorHandler.MatchingTypesError_After(witness, nextWitness, first, second);
           return false;
